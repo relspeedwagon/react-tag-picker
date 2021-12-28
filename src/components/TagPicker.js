@@ -1,19 +1,13 @@
-import tags from "../tags.json";
-import Tag from "./Tag.js";
+import { useState } from "react";
+import FolderContents from "./FolderContents";
 
 const TagPicker = () => {
+  
   return (
     <div>
       <h1>Tag Picker</h1>
-      {tags.map((tag) => {
-        return (
-          <Tag
-            name={tag.name}
-            isFolder={tag.isFolder}
-          />
-        )
-      })}
-      
+      <FolderContents
+      /> 
     </div>
   )
 }
