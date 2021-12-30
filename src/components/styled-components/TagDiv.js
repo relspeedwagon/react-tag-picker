@@ -11,12 +11,15 @@ margin: 1rem 0;
   h3 {
     margin: 0;
   }
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const TagDiv = (props) => {
   return (
     <Container>
-      <input type="checkbox"></input>
+      <input onChange={props.onChange} type="checkbox" checked={props.isChecked} name={props.tagName} id={props.id}></input>
       <h3> {props.tagName} </h3>
     </Container>
   )

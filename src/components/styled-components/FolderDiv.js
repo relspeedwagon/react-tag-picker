@@ -7,9 +7,10 @@ background-color: #DAF2F2;
 border: 0.2px solid #BED4D4;
 display: flex;
 flex-direction: row;
-justify-content: center;
+justify-content: left;
 align-items: center;
   h2 {
+    margin: 1rem 2.5rem;
   }
   &:hover {
     cursor: pointer;

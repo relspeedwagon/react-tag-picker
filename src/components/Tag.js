@@ -6,9 +6,9 @@ const Tag = ({
   id,
   name,
   isFolder,
-  parent,
-  ancestors,
   onClick,
+  onChange,
+  isChecked
 }) => {
 
   
@@ -21,7 +21,12 @@ const Tag = ({
         >
       </FolderDiv> 
 
-    : <TagDiv tagName={name}></TagDiv>}
+    : <TagDiv 
+        id={id}
+        tagName={name}
+        onChange={onChange}
+        isChecked={isChecked}
+      ></TagDiv>}
     </>
   )
 }
