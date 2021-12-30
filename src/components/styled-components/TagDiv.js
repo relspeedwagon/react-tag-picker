@@ -2,16 +2,23 @@ import styled from "styled-components";
 
 const Container = styled.div.attrs((props) => ({
 }))`
-width: 100%;
+background-color: #ECEEF5;
+border: 0.5px solid #F7F7FB;
+border-radius: 500px;
+width: fit-content;
 display: flex;
 flex-direction: row;
-justify-content: center;
 align-items: center;
-margin: 1rem 0;
+margin: 1rem 2.5rem;
+padding: .4rem 1rem;
   h3 {
-    margin: 0;
+    font-weight: 500;
+    margin: 0 0 0 .5rem;
   }
-  &:hover {
+  .checkbox {
+    filter: grayscale(100%);
+  }
+  input:hover {
     cursor: pointer;
   }
 `;
@@ -19,7 +26,7 @@ margin: 1rem 0;
 const TagDiv = (props) => {
   return (
     <Container>
-      <input onChange={props.onChange} type="checkbox" checked={props.isChecked} name={props.tagName} id={props.id}></input>
+      <input className="checkbox" onChange={props.onChange} type="checkbox" checked={props.isChecked} name={props.tagName} id={props.id}></input>
       <h3> {props.tagName} </h3>
     </Container>
   )

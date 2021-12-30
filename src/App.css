@@ -1,12 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
 .App {
-  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  text-align: left;
+  color: #333333;
+  display:flex;
+  flex-direction: column;
 }
 
-.folderContents {
-  margin: 10%;
+.title {
+  color:#179F9E;
+  margin-bottom: 0;
+  margin-left: 5%;
+}
+
+.folderHeading {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+  .folderHeading h2{
+    text-align: center;
+  }
+  
+.selectedFolder {
+  min-height: 60vh;
   border: 0.2px solid #BED4D4;
   border-radius: 3px;
+  margin: 0 5%;
+  padding: 2% 10%;
 }
-.tagList {
-  margin: 5%;
+svg {
+  color: #179F9E;
+  margin: 0 .5rem 0 0;
 }

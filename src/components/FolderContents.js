@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Tag from "./Tag";
-import SelectedTags from "./styled-components/SelectedTags"
+import SelectedTags from "./styled-components/SelectedTags";
+import Button from "./styled-components/Button";
 
 const FolderContents = ({
   tags,
@@ -44,17 +46,29 @@ const FolderContents = ({
     }
   }
 
+  const clearFolderSelections = () => {
+    setParentFolder({});
+    setSelectedFolder({
+      id: null,
+      name: "",
+      parentID: null,
+    });
+
+  }
+
   useEffect(() => {
     getParentObj();
   }, [selectedFolder, selectedTags])
 
 
   return (
-    <div className="folderContents"> 
-      <h1>{selectedFolder.name ? selectedFolder.name : "Root Level"}</h1>
-      {selectedFolder.id ? <button onClick={() => {onPrevFolderSelection()}}> back </button> : <></>}
+    <div className="selectedFolder"> 
+      <div className="folderHeading">
+        <h2> <FontAwesomeIcon icon={["far", "folder-open"]} />{selectedFolder.name ? selectedFolder.name : "Root Level"}</h2>
+        {selectedFolder.id ? <Button onClick={() => {onPrevFolderSelection()}}><FontAwesomeIcon icon="chevron-left" /> back to previous</Button> : <></>}
+      </div>
       
-      <section className="tagList">
+      <section className="folderContents">
       {
         sortedTags.map((tag) => {
           if (selectedFolder.id === tag.parent){
@@ -74,7 +88,8 @@ const FolderContents = ({
         })
       }
       </section>
-      {selectedTags.length ? <SelectedTags selectedTags={selectedTags} /> : <></>}
+      {selectedTags.length ? <SelectedTags selectedTags={selectedTags} onClick={() => setSelectedTags([])} /> : <></>}
+      {selectedFolder.id ? <Button onClick={() => {clearFolderSelections()}}><FontAwesomeIcon icon="chevron-left" /> back to root</Button> : <></>}
     </div>
   )
 
