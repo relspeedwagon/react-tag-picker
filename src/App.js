@@ -1,5 +1,5 @@
-import './App.css';
-import TagPicker from './components/TagPicker';
+import "./App.css";
+import TagPicker from "./components/TagPicker";
 
 function App() {
   return (

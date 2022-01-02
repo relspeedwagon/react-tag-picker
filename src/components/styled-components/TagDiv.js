@@ -1,19 +1,19 @@
 import styled from "styled-components";
 
-const Container = styled.div.attrs((props) => ({
-}))`
-background-color: #ECEEF5;
-border: 0.5px solid #F7F7FB;
-border-radius: 500px;
-width: fit-content;
-display: flex;
-flex-direction: row;
-align-items: center;
-margin: 1rem 2.5rem;
-padding: .4rem 1rem;
+const Container = styled.div.attrs((props) => ({}))`
+  background-color: #eceef5;
+  border: 0.5px solid #f7f7fb;
+  border-radius: 500px;
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 1rem 2.5rem;
+  padding: 0.4rem 1rem;
   h3 {
+    font-size: 1.2rem;
     font-weight: 500;
-    margin: 0 0 0 .5rem;
+    margin: 0 0 0 0.5rem;
   }
   .checkbox {
     filter: grayscale(100%);
@@ -26,10 +26,24 @@ padding: .4rem 1rem;
 const TagDiv = (props) => {
   return (
     <Container>
-      <input className="checkbox" onChange={props.onChange} type="checkbox" checked={props.isChecked} name={props.tagName} id={props.id}></input>
-      <h3> {props.tagName} </h3>
+      <input
+        type="checkbox"
+        className="checkbox"
+        id={props.id}
+        name={props.tagName}
+        onChange={props.onChange}
+        checked={props.isChecked}
+        aria-label={
+          props.isChecked
+            ? `${props.tagName}, is in selected tags`
+            : `${props.tagName}, check to add to selected tags`
+        }
+      ></input>
+      <label htmlFor={props.id}>
+        <h3> {props.tagName} </h3>
+      </label>
     </Container>
-  )
-}
+  );
+};
 
 export default TagDiv;

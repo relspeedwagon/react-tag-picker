@@ -4,12 +4,16 @@ import Tag from "./Tag";
 import SelectedTags from "./styled-components/SelectedTags";
 import Button from "./styled-components/Button";
 
-const FolderContents = ({
-  tags,
-}) => {
-  let isfolder = []
-  let isTag = []
-  const tagsSortAsc = tags.sort((a, b) => a.name.toLowerCase() < b.name.toLowerCase() ? -1 : a.name.toLowerCase() > b.name.toLowerCase() ? 1 : 0);
+const FolderContents = ({ tags }) => {
+  let isfolder = [];
+  let isTag = [];
+  const tagsSortAsc = tags.sort((a, b) =>
+    a.name.toLowerCase() < b.name.toLowerCase()
+      ? -1
+      : a.name.toLowerCase() > b.name.toLowerCase()
+      ? 1
+      : 0
+  );
   tagsSortAsc.forEach((tag) => (tag.isFolder ? isfolder : isTag).push(tag));
   const sortedTags = isfolder.concat(isTag);
 
@@ -22,29 +26,38 @@ const FolderContents = ({
   const [selectedTags, setSelectedTags] = useState([]);
 
   const getParentObj = () => {
-    if (selectedFolder.parentID){
-      const parentObj = tags.filter((tag) => tag._id === selectedFolder.parentID)
+    if (selectedFolder.parentID) {
+      const parentObj = tags.filter(
+        (tag) => tag._id === selectedFolder.parentID
+      );
       setParentFolder(parentObj[0]);
     } else {
       setParentFolder({});
     }
-  }
+  };
 
   const onPrevFolderSelection = () => {
-    if (parentFolder && parentFolder._id){
-      setSelectedFolder({id: parentFolder._id, name: parentFolder.name, parentID: parentFolder.parent})
+    if (parentFolder && parentFolder._id) {
+      setSelectedFolder({
+        id: parentFolder._id,
+        name: parentFolder.name,
+        parentID: parentFolder.parent,
+      });
     } else {
-      setSelectedFolder({id: null, name: "", parentID: null});
+      setSelectedFolder({ id: null, name: "", parentID: null });
     }
-  }
+  };
 
   const onTagSelectionChange = (e) => {
-    if (e.target.checked){
-      setSelectedTags([...selectedTags, {id: e.target.id, name: e.target.name}]);
-    } else{
-      setSelectedTags(selectedTags.filter(tag => tag.name !== e.target.name))
+    if (e.target.checked) {
+      setSelectedTags([
+        ...selectedTags,
+        { id: e.target.id, name: e.target.name },
+      ]);
+    } else {
+      setSelectedTags(selectedTags.filter((tag) => tag.name !== e.target.name));
     }
-  }
+  };
 
   const clearFolderSelections = () => {
     setParentFolder({});
@@ -53,25 +66,42 @@ const FolderContents = ({
       name: "",
       parentID: null,
     });
-
-  }
+  };
 
   useEffect(() => {
     getParentObj();
-  }, [selectedFolder, selectedTags])
-
+  }, [selectedFolder, selectedTags]);
 
   return (
-    <div className="selectedFolder"> 
+    <section
+      className="selectedFolder"
+      aria-label={`You are currently in the selected folder ${
+        selectedFolder.name ? selectedFolder.name : "Root Level"
+      }`}
+    >
       <div className="folderHeading">
-        <h2> <FontAwesomeIcon icon={["far", "folder-open"]} />{selectedFolder.name ? selectedFolder.name : "Root Level"}</h2>
-        {selectedFolder.id ? <Button onClick={() => {onPrevFolderSelection()}}><FontAwesomeIcon icon="chevron-left" /> back to previous</Button> : <></>}
+        <h2>
+          {" "}
+          <FontAwesomeIcon icon={["far", "folder-open"]} />
+          {selectedFolder.name ? selectedFolder.name : "Root Level"}
+        </h2>
+        {selectedFolder.id ? (
+          <Button
+            onClick={() => {
+              onPrevFolderSelection();
+            }}
+            aria-label="Go back to the previous folder"
+          >
+            <FontAwesomeIcon icon="chevron-left" /> back to previous
+          </Button>
+        ) : (
+          <></>
+        )}
       </div>
-      
+
       <section className="folderContents">
-      {
-        sortedTags.map((tag) => {
-          if (selectedFolder.id === tag.parent){
+        {sortedTags.map((tag) => {
+          if (selectedFolder.id === tag.parent) {
             return (
               <Tag
                 id={tag._id}
@@ -79,20 +109,42 @@ const FolderContents = ({
                 name={tag.name}
                 isFolder={tag.isFolder}
                 parent={tag.parent}
-                onClick={() => setSelectedFolder({id: tag._id, name: tag.name, parentID: tag.parent})}
+                onClick={() =>
+                  setSelectedFolder({
+                    id: tag._id,
+                    name: tag.name,
+                    parentID: tag.parent,
+                  })
+                }
                 onChange={(e) => onTagSelectionChange(e)}
-                isChecked={selectedTags.map(el => el.name).includes(tag.name)}
+                isChecked={selectedTags.map((el) => el.name).includes(tag.name)}
               />
-            )
+            );
           }
-        })
-      }
+        })}
       </section>
-      {selectedTags.length ? <SelectedTags selectedTags={selectedTags} onClick={() => setSelectedTags([])} /> : <></>}
-      {selectedFolder.id ? <Button onClick={() => {clearFolderSelections()}}><FontAwesomeIcon icon="chevron-left" /> back to root</Button> : <></>}
-    </div>
-  )
-
-}
+      {selectedTags.length ? (
+        <SelectedTags
+          selectedTags={selectedTags}
+          onClick={() => setSelectedTags([])}
+        />
+      ) : (
+        <></>
+      )}
+      {selectedFolder.id ? (
+        <Button
+          onClick={() => {
+            clearFolderSelections();
+          }}
+          aria-label="Go back to the root folder"
+        >
+          <FontAwesomeIcon icon="chevron-left" /> back to root
+        </Button>
+      ) : (
+        <></>
+      )}
+    </section>
+  );
+};
 
 export default FolderContents;
