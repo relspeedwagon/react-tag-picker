@@ -35,9 +35,11 @@ const FolderDiv = (props) => {
   return (
     <Container
       onClick={props.onClick}
+      onKeyDown={props.onKeyDown}
       role="button"
       aria-labelledby={props.folderName}
       tabIndex="0"
+      data-testid={props.testID}
     >
       <div className="folderName">
         <FontAwesomeIcon icon="folder" />

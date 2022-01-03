@@ -32,7 +32,9 @@ const TagDiv = (props) => {
         id={props.id}
         name={props.tagName}
         onChange={props.onChange}
+        onKeyDown={props.onKeyDown}
         checked={props.isChecked}
+        data-testid={props.testID}
         aria-label={
           props.isChecked
             ? `${props.tagName}, is in selected tags`

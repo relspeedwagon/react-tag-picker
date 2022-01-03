@@ -14,6 +14,11 @@
   margin-left: 5%;
 }
 
+.tagPicker {
+  min-height: 60vh;
+  padding: 0 5%;
+}
+
 .folderHeading {
   display: flex;
   flex-direction: column;
@@ -24,10 +29,9 @@
   }
   
 .selectedFolder {
-  min-height: 60vh;
   border: 0.2px solid #BED4D4;
   border-radius: 3px;
-  margin: 0 5%;
+  
   padding: 2% 10%;
 }
 svg {

@@ -1,0 +1,26 @@
+[
+  {
+    "_id": "123",
+    "name": "A: root tag",
+    "isFolder": false,
+    "parent": null
+  },
+  {
+    "_id": "456",
+    "name": "Z: root folder",
+    "isFolder": true,
+    "parent": null
+  },
+  {
+    "_id": "789",
+    "name": "test tag a",
+    "isFolder": false,
+    "parent": "456"
+  },
+  {
+    "_id": "1011",
+    "name": "test folder a",
+    "isFolder": true,
+    "parent": "456"
+  }
+]
